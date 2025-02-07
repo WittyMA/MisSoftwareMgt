@@ -6,10 +6,17 @@
 
     <groupId>com.yesulikplim</groupId>
     <artifactId>MisSoftwareMgt</artifactId>
+<<<<<<< HEAD
     <version>1.0</version>
     <packaging>war</packaging>
 
     <name>MisSoftwareMgt-1.0</name>
+=======
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <name>MisSoftwareMgt-1.0-SNAPSHOT</name>
+>>>>>>> 09f2313 (Initual commit:)
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
