@@ -4,6 +4,18 @@
         <servlet-name>Servlets</servlet-name>
         <servlet-class>Servlets</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ApplicationServlet</servlet-name>
+        <servlet-class>api.ApplicationServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ExportCSVServlet</servlet-name>
+        <servlet-class>api.ExportCSVServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ExportExcelServlet</servlet-name>
+        <servlet-class>api.ExportExcelServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Servlets</servlet-name>
         <url-pattern>/Servlets</url-pattern>
@@ -12,5 +24,28 @@
         <session-timeout>
             30
         </session-timeout>
+    <!-- Mapping for Jakarta RESTful Web Services -->
+    <servlet>
+        <servlet-name>jakarta.ws.rs.core.Application</servlet-name>
+        <servlet-class>jakarta.ws.rs.core.Application</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>jakarta.ws.rs.core.Application</servlet-name>
+        <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ApplicationServlet</servlet-name>
+        <url-pattern>/ApplicationServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExportCSVServlet</servlet-name>
+        <url-pattern>/ExportCSVServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExportExcelServlet</servlet-name>
+        <url-pattern>/ExportExcelServlet</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>30</session-timeout>
     </session-config>
 </web-app>

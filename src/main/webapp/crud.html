@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h2 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background: #007BFF;
+            color: white;
+        }
+        button {
+            padding: 5px 10px;
+            margin: 2px;
+            cursor: pointer;
+        }
+        .delete-btn {
+            background: red;
+            color: white;
+            border: none;
+        }
+        .edit-btn {
+            background: orange;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+
+    <h2>Application Management</h2>
+
+    <form action="ApplicationServlet" method="POST">
+        <input type="text" id="app_name" name="app_name" placeholder="App Name" required>
+        <input type="text" id="version_number" name="version_number" placeholder="Version No" required>
+        <input type="text" id="vendor" name="vendor" placeholder="Vendor" required>
+        <input type="date" id="deployment_date" name="deployment_date" required>
+        <input type="text" id="owner" name="owner" placeholder="Owner" required>
+        <input type="text" id="database_type" name="database_type" placeholder="DB Type" required>
+        <input type="text" id="operating_system" name="operating_system" placeholder="Operating Sys" required>
+        <select id="hosting_environment" name="hosting_environment">
+           <option value="ON_PREMISE">ON_PREMISE</option>
+           <option value="CLOUD">CLOUD</option>
+           <option value="HYBRID">HYBRID</option>
+        </select>
+        <input type="text" id="purpose" name="purpose" placeholder="App Purpose" required>
+        <select id="critical_rating" name="critical_rating">
+            <option value="HIGH">HIGH</option>
+            <option value="MEDIUM">MEDIUM</option>
+            <option value="LOW">LOW</option>
+            <option value="CRITICAL">CRITICAL</option>
+        </select>
+        <input type="text" id="user_base" name="user_base" placeholder="User Base" required>
+        <input type="text" id="integrated_apps" name="integrated_apps" placeholder="Integrated Apps">
+        <input type="text" id="authentication_method" name="authentication_method" placeholder="Auth Method" required>
+        <input type="text" id="data_types" name="data_types" placeholder="Data Types" required>
+        <input type="text" id="transaction_volume" name="transaction_volume" placeholder="Transaction Volume">
+        <input type="text" id="users" name="users" placeholder="Users Name">
+        <button type="submit">Add Application</button>
+    </form>
+    <hr><!-- Horizontal between the add form and the export button -->
+    <!-- Export Button -->
+<button id="exportBtn">Export to</button>
+
+<!-- Dropdown Menu -->
+<div id="exportOptions" style="display: none; position: absolute; background: white; border: 1px solid #ccc; padding: 10px;">
+    <button onclick="exportData('excel')">Export to Excel</button>
+    <button onclick="exportData('csv')">Export to CSV</button>
+</div>
+
+<script>
+    // Show/Hide Export Options
+    document.getElementById("exportBtn").addEventListener("click", function (event) {
+        let dropdown = document.getElementById("exportOptions");
+        dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+
+        // Position the dropdown near the button
+        dropdown.style.left = (event.pageX + 0) + "px";
+        dropdown.style.top = (event.pageY + 0) + "px";
+    });
+
+    // Export function
+    function exportData(type) {
+        if (type === 'excel') {
+            window.location.href = "http://localhost:8090/MisSoftwareMgt-1.0/ExportExcelServlet";
+        } else if (type === 'csv') {
+            window.location.href = "http://localhost:8090/MisSoftwareMgt-1.0/ExportCSVServlet";
+        }
+        document.getElementById("exportOptions").style.display = "none"; // Hide menu after selection
+    }
+
+    // Hide dropdown if clicked outside
+    document.addEventListener("click", function (event) {
+        let dropdown = document.getElementById("exportOptions");
+        if (event.target.id !== "exportBtn" && !dropdown.contains(event.target)) {
+            dropdown.style.display = "none";
+        }
+    });
+</script>
+<br><br>
+    <table id="applicationsTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>App Name</th>
+                <th>Version No</th>
+                <th>Vendor</th>
+                <th>Deployment Date</th>
+                <th>Owner</th>
+                <th>Database Type</th>
+                <th>Operating System</th>
+                <th>Hosting Env</th>
+                <th>Purpose</th>
+                <th>Critical Rating</th>
+                <th>User Base</th>
+                <th>Integrated Apps</th>
+                <th>Auth Method</th>
+                <th>Data Types</th>
+                <th>Transaction Volume</th>
+                <th>Users</th>
+                <th>Date Created</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    
+    <script>
+       const apiBaseUrl = "api/Applications";
+       
+    function editApplication(appId) {
+        alert("Edit Application ID: " + appId);
+        // Redirect or open an edit form (Example)
+        window.location.href = `edit.html?id=${appId}`;
+    }
+
+    function deleteApplication(appId) {
+    if (confirm("Are you sure you want to delete this application?")) {
+        fetch(`ApplicationServlet?id=${appId}`, {
+            method: "DELETE"
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert(data); // Show response from the server
+            location.reload(); // Refresh the page after deletion
+        })
+        .catch(error => console.error("Error:", error));
+    }
+}
+
+
+async function fetchApplications() {
+    try {
+        const response = await fetch(apiBaseUrl);
+        if (!response.ok) {
+            throw new Error("Failed to fetch applications.");
+        }
+        
+        const data = await response.json();
+        const tableBody = document.querySelector("#applicationsTable tbody");
+        tableBody.innerHTML = ""; 
+
+        data.forEach(app => {
+            const row = `
+                <tr>
+                    <td>${app.id}</td>
+                    <td>${app.app_name}</td>
+                    <td>${app.version_number}</td>
+                    <td>${app.vendor}</td>
+                    <td>${app.deployment_date}</td>
+                    <td>${app.owner}</td>
+                    <td>${app.database_type}</td>
+                    <td>${app.operating_system}</td>
+                    <td>${app.hosting_environment}</td>
+                    <td>${app.purpose}</td>
+                    <td>${app.critical_rating}</td>
+                    <td>${app.user_base}</td>
+                    <td>${app.integrated_apps}</td>
+                    <td>${app.authentication_method}</td>
+                    <td>${app.data_types}</td>
+                    <td>${app.transaction_volume}</td>
+                    <td>${app.users}</td>
+                    <td>${app.created_at}</td>
+                    <td>
+                        <button class="edit-btn" onclick="editApplication(${app.id})">Edit</button>
+                        <button class="delete-btn" onclick="deleteApplication(${app.id})">Delete</button>
+                    </td>
+                </tr>`;
+            tableBody.insertAdjacentHTML("beforeend", row);
+        });
+    } catch (error) {
+        console.error("Error fetching applications:", error);
+        alert("Error fetching applications. Please check your server.");
+    }
+}
+
+fetchApplications();
+
+    </script>
+
+</html>

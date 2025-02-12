@@ -4,6 +4,7 @@
     <groupId>com.yesulikplim</groupId>
     <artifactId>MisSoftwareMgt-web</artifactId>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <version>1.0</version>
     <packaging>war</packaging>
     <name>MisSoftwareMgt-web-1.0</name>
@@ -12,6 +13,11 @@
     <packaging>war</packaging>
     <name>MisSoftwareMgt-web-1.0-SNAPSHOT</name>
 >>>>>>> 09f2313 (Initual commit:)
+=======
+    <version>1.0</version>
+    <packaging>war</packaging>
+    <name>MisSoftwareMgt-web-1.0</name>
+>>>>>>> 4ccac10 (Updating all files and adding more files to the working directory)
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -46,7 +52,11 @@
         </plugins>
     </build>
 <<<<<<< HEAD
+<<<<<<< HEAD
 </project>
 =======
 </project>
 >>>>>>> 09f2313 (Initual commit:)
+=======
+</project>
+>>>>>>> 4ccac10 (Updating all files and adding more files to the working directory)
