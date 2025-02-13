@@ -98,6 +98,18 @@
             <version>0.0.20131108.vaadin1</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>com.emailage</groupId>
+            <artifactId>classic-api-client</artifactId>
+            <version>1.2.4</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>io.acryl.gradle.plugin</groupId>
+            <artifactId>gradle-avro-plugin</artifactId>
+            <version>0.8.1</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 
     <build>

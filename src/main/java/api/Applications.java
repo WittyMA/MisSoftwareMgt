@@ -23,7 +23,22 @@ import java.util.Date;
 
 @Entity
 @Table(name = "applications")
-@NamedQueries({@NamedQuery(name = "Applications.findAll", query = "SELECT a FROM Applications a"), @NamedQuery(name = "Applications.findByDeploymentDate", query = "SELECT a FROM Applications a WHERE a.deploymentDate = :deploymentDate"), @NamedQuery(name = "Applications.findById", query = "SELECT a FROM Applications a WHERE a.id = :id"), @NamedQuery(name = "Applications.findByCriticalRating", query = "SELECT a FROM Applications a WHERE a.criticalRating = :criticalRating"), @NamedQuery(name = "Applications.findByCreatedAt", query = "SELECT a FROM Applications a WHERE a.createdAt = :createdAt"), @NamedQuery(name = "Applications.findByHostingEnvironment", query = "SELECT a FROM Applications a WHERE a.hostingEnvironment = :hostingEnvironment"), @NamedQuery(name = "Applications.findByVersionNumber", query = "SELECT a FROM Applications a WHERE a.versionNumber = :versionNumber"), @NamedQuery(name = "Applications.findByDatabaseType", query = "SELECT a FROM Applications a WHERE a.databaseType = :databaseType"), @NamedQuery(name = "Applications.findByOperatingSystem", query = "SELECT a FROM Applications a WHERE a.operatingSystem = :operatingSystem"), @NamedQuery(name = "Applications.findByAppName", query = "SELECT a FROM Applications a WHERE a.appName = :appName"), @NamedQuery(name = "Applications.findByAuthenticationMethod", query = "SELECT a FROM Applications a WHERE a.authenticationMethod = :authenticationMethod"), @NamedQuery(name = "Applications.findByOwner", query = "SELECT a FROM Applications a WHERE a.owner = :owner"), @NamedQuery(name = "Applications.findByTransactionVolume", query = "SELECT a FROM Applications a WHERE a.transactionVolume = :transactionVolume"), @NamedQuery(name = "Applications.findByUserBase", query = "SELECT a FROM Applications a WHERE a.userBase = :userBase"), @NamedQuery(name = "Applications.findByVendor", query = "SELECT a FROM Applications a WHERE a.vendor = :vendor")})
+@NamedQueries({
+    @NamedQuery(name = "Applications.findAll", query = "SELECT a FROM Applications a"),
+    @NamedQuery(name = "Applications.findByDeploymentDate", query = "SELECT a FROM Applications a WHERE a.deploymentDate = :deploymentDate"), 
+    @NamedQuery(name = "Applications.findById", query = "SELECT a FROM Applications a WHERE a.id = :id"), 
+    @NamedQuery(name = "Applications.findByCriticalRating", query = "SELECT a FROM Applications a WHERE a.criticalRating = :criticalRating"), 
+    @NamedQuery(name = "Applications.findByCreatedAt", query = "SELECT a FROM Applications a WHERE a.createdAt = :createdAt"), 
+    @NamedQuery(name = "Applications.findByHostingEnvironment", query = "SELECT a FROM Applications a WHERE a.hostingEnvironment = :hostingEnvironment"),
+    @NamedQuery(name = "Applications.findByVersionNumber", query = "SELECT a FROM Applications a WHERE a.versionNumber = :versionNumber"), 
+    @NamedQuery(name = "Applications.findByDatabaseType", query = "SELECT a FROM Applications a WHERE a.databaseType = :databaseType"), 
+    @NamedQuery(name = "Applications.findByOperatingSystem", query = "SELECT a FROM Applications a WHERE a.operatingSystem = :operatingSystem"), 
+    @NamedQuery(name = "Applications.findByAppName", query = "SELECT a FROM Applications a WHERE a.appName = :appName"), 
+    @NamedQuery(name = "Applications.findByAuthenticationMethod", query = "SELECT a FROM Applications a WHERE a.authenticationMethod = :authenticationMethod"),
+    @NamedQuery(name = "Applications.findByOwner", query = "SELECT a FROM Applications a WHERE a.owner = :owner"),
+    @NamedQuery(name = "Applications.findByTransactionVolume", query = "SELECT a FROM Applications a WHERE a.transactionVolume = :transactionVolume"), 
+    @NamedQuery(name = "Applications.findByUserBase", query = "SELECT a FROM Applications a WHERE a.userBase = :userBase"), 
+    @NamedQuery(name = "Applications.findByVendor", query = "SELECT a FROM Applications a WHERE a.vendor = :vendor")})
 public class Applications implements Serializable {
   private static final long serialVersionUID = 1L;
   

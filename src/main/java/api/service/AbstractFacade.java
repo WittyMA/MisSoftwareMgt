@@ -52,6 +52,6 @@ public abstract class AbstractFacade<T> {
     CriteriaQuery<Long> cq = getEntityManager().getCriteriaBuilder().createQuery(Long.class);
     Root<T> rt = cq.from(this.entityClass);
     cq.select((Selection)getEntityManager().getCriteriaBuilder().count((Expression)rt));
-    return ((Long)getEntityManager().createQuery(cq).getSingleResult()).intValue();
+    return (getEntityManager().createQuery(cq).getSingleResult()).intValue();
   }
 }
